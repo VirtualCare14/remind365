@@ -1,0 +1,12 @@
+⚠ `experimental.instrumentationHook` is no longer needed, because `instrumentation.js` is available by default. You can remove it from next.config.ts.
+⚠ Invalid next.config.ts options detected: 
+⚠     Unrecognized key(s) in object: 'instrumentationHook' at "experimental"
+⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+^C^C⚠ `experimental.instrumentationHook` is no longer needed, because `instrumentation.js` is available by default. You can remove it from next.config.ts.
+⚠ Invalid next.config.ts options detected: 
+⚠     Unrecognized key(s) in object: 'instrumentationHook' at "experimental"
+⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+^C^C⚠ `experimental.instrumentationHook` is no longer needed, because `instrumentation.js` is available by default. You can remove it from next.config.ts.
+⚠ Invalid next.config.ts options detected: 
+⚠     Unrecognized key(s) in object: 'instrumentationHook' at "experimental"
+⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config

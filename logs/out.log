@@ -1,0 +1,36 @@
+
+> remind365@0.1.0 start
+> next start
+
+▲ Next.js 16.2.4
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.4:3000
+✓ Ready in 1957ms
+
+> remind365@0.1.0 start
+> next start
+
+▲ Next.js 16.2.4
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.4:3000
+✓ Ready in 1648ms
+Terminate batch job (Y/N)? 
+> remind365@0.1.0 start
+> next start
+
+▲ Next.js 16.2.4
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.4:3000
+✓ Ready in 647ms
+
+> remind365@0.1.0 start
+> next start
+
+▲ Next.js 16.2.4
+- Local:         http://localhost:3000
+- Network:       http://10.48.143.174:3000
+✓ Ready in 979ms
+🤖 Background CRON worker registered inside instrumentation.ts.
+
+🔔 [21/4/2026, 7:22:01 pm] Notification sent to Telegram! Customer: ramesh
+
