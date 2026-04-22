@@ -61,8 +61,9 @@ export async function runCronJob() {
         const amt = `₹${bill.billAmount.toLocaleString()}`;
         const billDateText = new Date(bill.billDate).toLocaleDateString();
         const dueText = dueDate.toLocaleDateString();
+        const productName = bill.productName || 'N/A';
         
-        const message = `🚨 *Payment Reminder* 🚨\n\n*Customer:* ${bill.customerName}\n*Amount:* ${amt}\n*Remark:* ${bill.remarks || 'None'}\n*Bill Date:* ${billDateText}\n*Due Date:* ${dueText}\n*Status:* ${bill.paymentStatus}\n\n_Please review and follow up with the customer._`;
+        const message = `🚨 *Payment Reminder* 🚨\n\n*Customer:* ${bill.customerName}\n*Amount:* ${amt}\n*Remark:* ${bill.remarks || 'None'}\n*Bill Date:* ${billDateText}\n*Due Date:* ${dueText}\n *Product name:* ${productName} \n*Status:* ${bill.paymentStatus}\n\n_Please review and follow up with the customer._`;
         
         await broadcastToChatIds((bill.user as unknown as IUser).telegramChatIds, message);
 

@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import HeaderWrapper from "@/components/HeaderWrapper";
 import AppToaster from "@/components/Toaster";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,13 +31,14 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[var(--background)]">
+      <body className="min-h-full flex flex-col bg-white">
         <HeaderWrapper>
           <Header />
         </HeaderWrapper>
-        <main className="flex-grow pt-20">
+        <main className="flex-grow pt-16 sm:pt-20">
           {children}
         </main>
+        <Footer />
         <AppToaster />
       </body>
     </html>

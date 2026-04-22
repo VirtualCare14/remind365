@@ -14,7 +14,8 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0B0F19;
-    --foreground: #f3f4f6;
+    /* #0B0F19 */
+    --foreground: #e1e6f1;
     --primary: #6366F1;
     --primary-hover: #818CF8;
     --nav-bg: rgba(11, 15, 25, 0.8);
