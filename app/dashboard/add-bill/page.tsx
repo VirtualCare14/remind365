@@ -139,8 +139,9 @@ export default function AddBill() {
               />
             </div>
 
-            <div>
+            <div className="relative">
               <label className="block text-sm font-medium mb-1.5">Bill Amount</label>
+              <span className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-gray-500 text-lg">₹</span>
               <input 
                 type="number" 
                 step="0.01"
@@ -148,7 +149,7 @@ export default function AddBill() {
                 required 
                 value={formData.billAmount}
                 onChange={(e) => setFormData({...formData, billAmount: e.target.value})}
-                className="input-premium"
+                className="input-premium pl-11"
                 placeholder="0.00"
               />
             </div>
