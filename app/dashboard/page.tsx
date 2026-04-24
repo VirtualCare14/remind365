@@ -87,7 +87,7 @@ export default function UserDashboard() {
 
         <div className="card-premium">
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2 border-b border-[var(--glass-border)] pb-4">
-            <Send className="text-purple-500" /> Linked Telegrams
+            <Send className="text-purple-500" /> Linked Chat IDs 
           </h2>
           <div className="space-y-3">
             {userData.telegramChatIds && userData.telegramChatIds.length > 0 ? (

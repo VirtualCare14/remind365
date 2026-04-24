@@ -51,15 +51,6 @@ export default function UserSidebar({ isOpen, onClose }: { isOpen?: boolean; onC
           <span className="text-sm font-bold text-gray-900 dark:text-gray-100 truncate" title={userName}>{userName}</span>
           <span className="text-xs text-gray-500">Dashboard Access</span>
         </div>
-        {isMobile && onClose && (
-          <button
-            onClick={onClose}
-            className="ml-auto p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-            aria-label="Close menu"
-          >
-            <X size={20} />
-          </button>
-        )}
       </div>
       <div className="p-6 flex-grow">
         <h2 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Menu</h2>
@@ -71,9 +62,10 @@ export default function UserSidebar({ isOpen, onClose }: { isOpen?: boolean; onC
               <Link
                 key={link.name}
                 href={link.href}
+                onClick={onClose}
                 className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all ${isActive ? 'bg-primary/10 text-primary' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'}`}
               >
-                <Icon size={20} className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all ${isActive ? 'bg-primary/10 text-primary' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'}`} />
+                <Icon size={20} />
                 <span>{link.name}</span>
               </Link>
             );
