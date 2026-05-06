@@ -1,29 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fcfcfc;
+  --background: #fffaf4;
   --foreground: #111827;
-  --primary: #4F46E5;
-  --primary-hover: #4338CA;
-  --nav-bg: rgba(255, 255, 255, 0.8);
-  --glass-border: rgba(0, 0, 0, 0.1);
+  --primary: #f97316;
+  --primary-hover: #ea580c;
+  --secondary: #eab308;
+  --secondary-hover: #ca8a04;
+  --nav-bg: rgba(255, 248, 238, 0.92);
+  --glass-border: rgba(249, 115, 22, 0.16);
   --card-bg: #ffffff;
-  --danger: #EF4444;
+  --danger: #ef4444;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0B0F19;
-    /* #0B0F19 */
-    --foreground: #e1e6f1;
-    --primary: #6366F1;
-    --primary-hover: #818CF8;
-    --nav-bg: rgba(11, 15, 25, 0.8);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --card-bg: #111827;
-    --danger: #F87171;
-  }
-}
+/* Light mode only - removed dark mode for consistent visibility */
 
 @theme inline {
   --color-background: var(--background);
@@ -69,19 +59,24 @@ body {
 
 /* Clean Form inputs */
 .input-premium {
-  background-color: var(--background);
-  border: 1px solid var(--glass-border);
+  background-color: #ffffff;
+  border: 2px solid #e5e7eb;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   width: 100%;
   outline: none;
   transition: all 0.3s ease;
-  color: var(--foreground);
+  color: #111827;
+  font-size: 1rem;
+}
+
+.input-premium::placeholder {
+  color: #9ca3af;
 }
 
 .input-premium:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  border-color: #f97316;
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15);
 }
 
 /* Standard Premium Card */
@@ -92,3 +87,15 @@ body {
   padding: 2rem;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
 }
+
+/* Brand Theme Utilities */
+.bg-brand { background-color: var(--primary); }
+.text-brand { color: var(--primary); }
+.bg-brand-soft { background-color: rgba(249, 115, 22, 0.08); }
+.bg-accent { background-color: var(--secondary); }
+.text-accent { color: var(--secondary); }
+.border-brand { border-color: var(--primary); }
+.border-accent { border-color: var(--secondary); }
+.border-brand-soft { border-color: rgba(249, 115, 22, 0.18); }
+.btn-brand { background-color: var(--primary); color: #ffffff; }
+.btn-brand:hover { background-color: var(--primary-hover); }

@@ -42,20 +42,20 @@ export default function UserLogin() {
     <div className="flex items-center justify-center min-h-[calc(100vh-80px)] px-4">
       <div className="card-premium w-full max-w-md relative overflow-hidden">
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
-        <div className="absolute bottom-0 left-0 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl -ml-16 -mb-16"></div>
+        <div className="absolute bottom-0 left-0 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl -ml-16 -mb-16"></div>
         
         <div className="relative text-center mb-8">
-          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
+          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-600">
             Welcome Back
           </h1>
-          <p className="text-gray-500 dark:text-gray-400 mt-2">Sign in to your account</p>
+          <p className="text-gray-500 mt-2">Sign in to your account</p>
         </div>
 
         <form onSubmit={handleLogin} className="relative space-y-6">
           <div>
-            <label className="block text-sm font-medium mb-1.5 text-gray-700 dark:text-gray-300">Email Address</label>
+            <label className="block text-sm font-medium mb-1.5 text-gray-700">Email Address</label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-600">
                 <Mail size={18} />
               </div>
               <input
@@ -69,9 +69,9 @@ export default function UserLogin() {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1.5 text-gray-700 dark:text-gray-300">Password</label>
+            <label className="block text-sm font-medium mb-1.5 text-gray-700">Password</label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-600">
                 <Key size={18} />
               </div>
               <input

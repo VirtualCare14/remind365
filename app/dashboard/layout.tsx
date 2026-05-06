@@ -8,7 +8,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 ` }} />
       <div className="flex min-h-screen">
         <UserSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
-        <div className="flex-1 w-full overflow-y-auto bg-gray-50 dark:bg-transparent relative">
+        <div className="flex-1 w-full overflow-y-auto bg-gray-50 relative">
           <nav className="md:hidden fixed top-0 left-0 right-0 z-40 bg-[#315B66] flex items-center justify-between px-4 py-2">
             <div className="flex items-center gap-2">
               <img

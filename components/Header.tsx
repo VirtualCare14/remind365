@@ -49,7 +49,7 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "glass shadow-lg shadow-black/5 dark:shadow-black/20" : "glass"
+        scrolled ? "glass shadow-lg shadow-black/5" : "glass"
       }`}
     >
       <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-16">
@@ -66,7 +66,7 @@ export default function Header() {
               height={46}
               className="rounded-xl shadow-sm"
             />
-            <span className="text-xl sm:text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600 tracking-tight">
+            <span className="text-xl sm:text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-primary to-orange-600 tracking-tight">
               Remind<span className="text-primary">365</span>
             </span>
           </Link>
@@ -77,7 +77,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-4 py-2.5 rounded-xl text-base lg:text-lg font-semibold text-gray-600 dark:text-gray-300 hover:text-primary hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-all duration-200"
+                className="px-4 py-2.5 rounded-xl text-base lg:text-lg font-semibold text-gray-600 hover:text-primary hover:bg-orange-50 transition-all duration-200"
               >
                 {link.label}
               </Link>
@@ -90,14 +90,14 @@ export default function Header() {
               <>
                 <Link
                   href="/admin/login"
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-base lg:text-lg font-semibold text-gray-600 dark:text-gray-300 hover:text-primary hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-all duration-200"
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-base lg:text-lg font-semibold text-gray-600 hover:text-primary hover:bg-orange-50 transition-all duration-200"
                 >
                   <ShieldCheck size={18} />
                   Admin
                 </Link>
                 <Link
                   href="/login"
-                  className="flex items-center gap-2 bg-primary hover:bg-primary-hover text-white px-6 py-2.5 rounded-xl text-base lg:text-lg font-bold btn-animate shadow-md shadow-indigo-500/20 hover:shadow-indigo-500/40 hover:scale-105 transition-all"
+                  className="flex items-center gap-2 bg-primary hover:bg-primary-hover text-white px-6 py-2.5 rounded-xl text-base lg:text-lg font-bold btn-animate shadow-md shadow-orange-500/20 hover:shadow-orange-500/40 hover:scale-105 transition-all"
                 >
                   <LogIn size={18} />
                   Login
@@ -109,12 +109,12 @@ export default function Header() {
               <>
                 <Link
                   href="/admin/dashboard"
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-base lg:text-lg font-bold text-primary hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-all"
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-base lg:text-lg font-bold text-primary hover:bg-orange-50 transition-all"
                 >
                   <LayoutDashboard size={18} />
                   Admin Dashboard
                 </Link>
-                <div className="w-px h-6 bg-gray-200 dark:bg-gray-700 mx-1" />
+                <div className="w-px h-6 bg-gray-200 mx-1" />
                 <LogoutButton />
               </>
             )}
@@ -123,12 +123,12 @@ export default function Header() {
               <>
                 <Link
                   href="/dashboard"
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-base lg:text-lg font-bold text-primary hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-all"
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-base lg:text-lg font-bold text-primary hover:bg-orange-50 transition-all"
                 >
                   <LayoutDashboard size={18} />
                   Dashboard
                 </Link>
-                <div className="w-px h-6 bg-gray-200 dark:bg-gray-700 mx-1" />
+                <div className="w-px h-6 bg-gray-200 mx-1" />
                 <LogoutButton />
               </>
             )}
@@ -139,7 +139,7 @@ export default function Header() {
             {!session && (
               <Link
                 href="/login"
-                className="flex items-center gap-1.5 bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded-xl text-sm font-bold btn-animate shadow-md shadow-indigo-500/20"
+                className="flex items-center gap-1.5 bg-primary hover:bg-primary-hover text-white px-4 py-2 rounded-xl text-sm font-bold btn-animate shadow-md shadow-orange-500/20"
               >
                 <LogIn size={15} />
                 Login
@@ -151,7 +151,7 @@ export default function Header() {
                 console.log("Menu clicked, current state:", isMenuOpen);
                 setIsMenuOpen(!isMenuOpen);
               }}
-              className="p-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 active:bg-gray-200 dark:active:bg-gray-700 transition-colors z-50 relative cursor-pointer touch-manipulation"
+              className="p-2.5 rounded-xl hover:bg-gray-100 active:bg-gray-200 transition-colors z-50 relative cursor-pointer touch-manipulation"
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
             >
@@ -169,22 +169,22 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl mx-2 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-primary hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-all"
+                className="flex items-center gap-3 px-4 py-3 rounded-xl mx-2 text-sm font-semibold text-gray-700 hover:text-primary hover:bg-orange-50 transition-all"
               >
-                <span className="text-gray-400 dark:text-gray-500">{link.icon}</span>
+                <span className="text-gray-600">{link.icon}</span>
                 {link.label}
               </Link>
             ))}
 
-            <div className="h-px bg-gray-100 dark:bg-gray-800 mx-4 my-1" />
+            <div className="h-px bg-gray-100 mx-4 my-1" />
 
             {!session && (
               <Link
                 href="/admin/login"
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl mx-2 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-primary hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-all"
+                className="flex items-center gap-3 px-4 py-3 rounded-xl mx-2 text-sm font-semibold text-gray-700 hover:text-primary hover:bg-orange-50 transition-all"
               >
-                <span className="text-gray-400 dark:text-gray-500"><ShieldCheck size={17} /></span>
+                <span className="text-gray-600"><ShieldCheck size={17} /></span>
                 Admin Login
               </Link>
             )}
@@ -193,7 +193,7 @@ export default function Header() {
               <Link
                 href="/admin/dashboard"
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl mx-2 text-sm font-bold text-primary hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-all"
+                className="flex items-center gap-3 px-4 py-3 rounded-xl mx-2 text-sm font-bold text-primary hover:bg-orange-50 transition-all"
               >
                 <LayoutDashboard size={17} />
                 Admin Dashboard
@@ -204,7 +204,7 @@ export default function Header() {
               <Link
                 href="/dashboard"
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl mx-2 text-sm font-bold text-primary hover:bg-indigo-50 dark:hover:bg-indigo-900/30 transition-all"
+                className="flex items-center gap-3 px-4 py-3 rounded-xl mx-2 text-sm font-bold text-primary hover:bg-orange-50 transition-all"
               >
                 <LayoutDashboard size={17} />
                 Dashboard

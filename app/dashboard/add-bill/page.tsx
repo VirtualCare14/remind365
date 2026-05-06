@@ -91,8 +91,8 @@ export default function AddBill() {
   return (
     <div className="p-6 md:p-10 w-full max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Add New Bill</h1>
-        <p className="text-gray-500">Log a new sale and set automated reminders.</p>
+        <h1 className="text-3xl font-bold text-gray-900">Add New Bill</h1>
+        <p className="text-gray-600">Log a new sale and set automated reminders.</p>
       </div>
 
       <div className="card-premium">
@@ -113,12 +113,12 @@ export default function AddBill() {
                 placeholder="Start typing..."
               />
               {showDropdown && filteredCustomers.length > 0 && (
-                <ul className="absolute z-10 w-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 mt-1 rounded-md shadow-lg max-h-40 overflow-y-auto">
+                <ul className="absolute z-10 w-full bg-white border border-gray-200 mt-1 rounded-md shadow-lg max-h-40 overflow-y-auto">
                   {filteredCustomers.map((cust, idx) => (
                     <li 
                       key={idx} 
                       onMouseDown={() => selectCustomer(cust)}
-                      className="px-4 py-2 cursor-pointer hover:bg-indigo-50 dark:hover:bg-gray-700 border-b border-gray-100 dark:border-gray-700 last:border-0"
+                      className="px-4 py-2 cursor-pointer hover:bg-orange-50 border-b border-gray-100 last:border-0"
                     >
                       {cust}
                     </li>
@@ -170,11 +170,9 @@ export default function AddBill() {
               <input 
                 type="date" 
                 required 
-                readOnly
-                disabled
                 value={formData.billDate}
                 onChange={(e) => setFormData({...formData, billDate: e.target.value})}
-                className="input-premium bg-gray-100 dark:bg-gray-800 text-gray-500 cursor-not-allowed border-gray-300 dark:border-gray-700"
+                className="input-premium"
               />
             </div>
 
@@ -194,7 +192,7 @@ export default function AddBill() {
               <select 
                 value={formData.paymentStatus}
                 onChange={(e) => setFormData({...formData, paymentStatus: e.target.value})}
-                className="input-premium bg-white dark:bg-gray-800"
+                className="input-premium bg-white"
               >
                 <option value="Paid">Paid</option>
                 <option value="Partial">Partial</option>
@@ -203,10 +201,10 @@ export default function AddBill() {
             </div>
             
             <div className="col-span-1 md:col-span-2 mt-4 pt-4 border-t border-[var(--glass-border)]">
-              <h3 className="text-lg font-semibold mb-4 text-purple-600 dark:text-purple-400">Telegram Reminder Settings</h3>
+              <h3 className="text-lg font-semibold mb-4 text-amber-600">Telegram Reminder Settings</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium mb-1.5 text-gray-700 dark:text-gray-300">Days Difference (from bill date)</label>
+                  <label className="block text-sm font-medium mb-1.5 text-gray-700">Days Difference (from bill date)</label>
                   <input 
                     type="number" 
                     value={formData.reminderDays}
@@ -217,7 +215,7 @@ export default function AddBill() {
                   <p className="text-xs text-gray-500 mt-1">If Unpaid, reminding begins X days after Bill Date, and repeats daily.</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1.5 text-gray-700 dark:text-gray-300">Time (IST)</label>
+                  <label className="block text-sm font-medium mb-1.5 text-gray-700">Time (IST)</label>
                   <input 
                     type="time" 
                     required 

@@ -155,9 +155,9 @@ export default function AllBills() {
   }, {});
 
   const getStatusColor = (status: string) => {
-    if (status === 'Paid') return 'text-green-700 bg-green-100 dark:bg-green-900/30 dark:text-green-400';
-    if (status === 'Partial') return 'text-yellow-700 bg-yellow-100 dark:bg-yellow-900/30 dark:text-yellow-400';
-    return 'text-red-700 bg-red-100 dark:bg-red-900/30 dark:text-red-400';
+    if (status === 'Paid') return 'text-green-700 bg-green-100';
+    if (status === 'Partial') return 'text-yellow-700 bg-yellow-100';
+    return 'text-red-700 bg-red-100';
   };
 
   if (loading) return <div className="p-10 text-center animate-pulse">Loading Bills...</div>;
@@ -166,12 +166,12 @@ export default function AllBills() {
     <div className="p-6 md:p-10 w-full animate-in fade-in max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">All Bills</h1>
-          <p className="text-gray-500">Manage and export all generated bills across your customers.</p>
+          <h1 className="text-3xl font-bold text-gray-900">All Bills</h1>
+          <p className="text-gray-600">Manage and export all generated bills across your customers.</p>
         </div>
         <div className="flex items-center gap-3 w-full md:w-auto">
           <div className="relative flex-grow md:w-64">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600" size={18} />
             <input 
               type="text" 
               placeholder="Search bills..." 
@@ -197,19 +197,19 @@ export default function AllBills() {
         ) : (
           Object.entries(groupedBills).map(([customer, customerBills]) => (
             <div key={customer} className="card-premium !p-0 overflow-hidden shadow-sm border-[var(--glass-border)]">
-              <div className="bg-gray-50 dark:bg-gray-800/50 p-4 border-b border-[var(--glass-border)] flex justify-between items-center">
-                <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100">{customer} <span className="text-sm font-normal text-gray-500">({customerBills.length} items)</span></h2>
+              <div className="bg-gray-50 p-4 border-b border-[var(--glass-border)] flex justify-between items-center">
+                <h2 className="text-xl font-bold text-gray-800">{customer} <span className="text-sm font-normal text-gray-500">({customerBills.length} items)</span></h2>
                 <button 
                   onClick={() => exportCustomerExcel(customer, customerBills)}
-                  className="text-xs font-semibold px-3 py-1.5 rounded-md bg-white border border-gray-200 dark:bg-gray-700 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors flex items-center gap-2"
+                  className="text-xs font-semibold px-3 py-1.5 rounded-md bg-white border border-gray-200 hover:bg-gray-100 transition-colors flex items-center gap-2"
                 >
                   <Download size={14} /> Export Customer
                 </button>
               </div>
               
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-800">
-                  <thead className="bg-white dark:bg-gray-900/30">
+                <table className="min-w-full divide-y divide-gray-200">
+                  <thead className="bg-white">
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Product</th>
                       <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Amount</th>
@@ -220,18 +220,18 @@ export default function AllBills() {
                       <th className="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-200 dark:divide-gray-800 bg-white dark:bg-transparent">
+                  <tbody className="divide-y divide-gray-200 bg-white">
                     {customerBills.map((bill) => (
-                      <tr key={bill._id} className="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">
+                      <tr key={bill._id} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                           {bill.productName}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold">
                           ₹{bill.billAmount.toLocaleString()}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <div><span className="font-medium text-gray-400">Bill:</span> {new Date(bill.billDate).toLocaleDateString()}</div>
-                          <div><span className="font-medium text-gray-400">Due:</span> <span className="text-red-500 font-medium">{new Date(bill.dueDate).toLocaleDateString()}</span></div>
+                          <div><span className="font-medium text-gray-600">Bill:</span> {new Date(bill.billDate).toLocaleDateString()}</div>
+                          <div><span className="font-medium text-gray-600">Due:</span> <span className="text-red-500 font-medium">{new Date(bill.dueDate).toLocaleDateString()}</span></div>
                         </td>
                         <td className="px-6 py-4 text-sm text-gray-500 max-w-xs truncate">
                           {bill.remarks || '-'}
@@ -239,7 +239,7 @@ export default function AllBills() {
                         <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                           {(() => {
                             if (bill.paymentStatus === 'Paid') {
-                              return <span className="text-gray-400 italic">Completed</span>;
+                              return <span className="text-gray-600 italic">Completed</span>;
                             }
                             
                             const targetDate = new Date(bill.billDate);
@@ -263,10 +263,10 @@ export default function AllBills() {
                             
                             return (
                               <div className="flex flex-col">
-                                <span className="font-medium text-gray-700 dark:text-gray-300">
+                                <span className="font-medium text-gray-700">
                                   {nextDate.toLocaleDateString()}
                                 </span>
-                                <span className="text-xs text-gray-400">
+                                <span className="text-xs text-gray-600">
                                   {bill.reminderTime || '09:00'} IST
                                 </span>
                               </div>
@@ -277,7 +277,7 @@ export default function AllBills() {
                           <select 
                             value={bill.paymentStatus}
                             onChange={(e) => updateStatus(bill._id, e.target.value)}
-                            className={`text-xs font-bold px-2 py-1 rounded-full outline-none border cursor-pointer ${getStatusColor(bill.paymentStatus)} border-transparent hover:border-gray-300 dark:hover:border-gray-600 transition-colors`}
+                            className={`text-xs font-bold px-2 py-1 rounded-full outline-none border cursor-pointer ${getStatusColor(bill.paymentStatus)} border-transparent hover:border-gray-300 transition-colors`}
                           >
                             <option value="Paid">Paid</option>
                             <option value="Partial">Partial</option>
@@ -287,7 +287,7 @@ export default function AllBills() {
                         <td className="px-6 py-4 text-right text-sm">
                           <button 
                             onClick={() => handleDelete(bill._id, bill.productName)}
-                            className="text-gray-400 hover:text-red-600 transition-colors inline-block p-1"
+                            className="text-gray-600 hover:text-red-600 transition-colors inline-block p-1"
                             title="Delete Bill"
                           >
                             <Trash2 size={18} />

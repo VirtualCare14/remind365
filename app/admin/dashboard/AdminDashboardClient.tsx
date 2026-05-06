@@ -140,7 +140,7 @@ export default function AdminDashboardClient() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">User Management</h1>
+          <h1 className="text-3xl font-bold text-gray-900">User Management</h1>
           <p className="text-gray-500 mt-1">Manage user access and details</p>
         </div>
         <div className="flex items-center gap-4">
@@ -163,7 +163,7 @@ export default function AdminDashboardClient() {
             <h2 className="text-xl font-bold">{editingUserId ? 'Edit User' : 'Create New User'}</h2>
             <button 
               onClick={() => { setShowCreate(false); setEditingUserId(null); setFormData({ name: '', email: '', password: '', telegramChatIds: '', isDisabled: false }); }}
-              className="text-gray-400 hover:text-gray-600"
+              className="text-gray-600 hover:text-gray-600"
             >
               <X size={24} />
             </button>
@@ -206,8 +206,8 @@ export default function AdminDashboardClient() {
           <div className="p-12 text-center text-gray-500">No users found. Create one.</div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-800">
-              <thead className="bg-gray-50 dark:bg-gray-900/50">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
                 <tr>
                   <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">User</th>
                   <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Telegram IDs</th>
@@ -215,19 +215,19 @@ export default function AdminDashboardClient() {
                   <th className="px-6 py-4 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200 dark:divide-gray-800 bg-transparent">
+              <tbody className="divide-y divide-gray-200 bg-transparent">
                 {users.map((user) => (
-                  <tr key={user._id} className="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+                  <tr key={user._id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex flex-col">
-                        <span className="font-medium text-gray-900 dark:text-gray-100">{user.name}</span>
+                        <span className="font-medium text-gray-900">{user.name}</span>
                         <span className="text-sm text-gray-500">{user.email}</span>
                       </div>
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex flex-wrap gap-1">
                         {user.telegramChatIds && user.telegramChatIds.map((id: string) => (
-                          <span key={id} className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                          <span key={id} className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
                             {id}
                           </span>
                         ))}
@@ -235,18 +235,18 @@ export default function AdminDashboardClient() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       {user.isDisabled ? (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-400">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
                           <Ban size={12} /> Disabled
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-400">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
                           <CheckCircle size={12} /> Active
                         </span>
                       )}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex items-center justify-end gap-3">
-                        <button onClick={() => toggleDisable(user._id, user.isDisabled)} className="text-gray-500 hover:text-gray-800 dark:hover:text-white transition-colors" title={user.isDisabled ? 'Enable' : 'Disable'}>
+                        <button onClick={() => toggleDisable(user._id, user.isDisabled)} className="text-gray-500 hover:text-gray-800 transition-colors" title={user.isDisabled ? 'Enable' : 'Disable'}>
                           {user.isDisabled ? <CheckCircle size={18} /> : <Ban size={18} />}
                         </button>
                         <button onClick={() => startEdit(user)} className="text-primary hover:text-primary-hover transition-colors" title="Edit">

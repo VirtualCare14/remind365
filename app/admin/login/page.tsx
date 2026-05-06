@@ -45,15 +45,15 @@ export default function AdminLogin() {
           <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
             <Lock className="w-8 h-8 text-primary" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Admin Portal</h1>
-          <p className="text-gray-500 dark:text-gray-400 mt-2">Secure access to management dashboard</p>
+          <h1 className="text-3xl font-bold text-gray-900">Admin Portal</h1>
+          <p className="text-gray-500 mt-2">Secure access to management dashboard</p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium mb-1.5 text-gray-700 dark:text-gray-300">Email Address</label>
+            <label className="block text-sm font-medium mb-1.5 text-gray-700">Email Address</label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-600">
                 <Mail size={18} />
               </div>
               <input
@@ -67,9 +67,9 @@ export default function AdminLogin() {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1.5 text-gray-700 dark:text-gray-300">Password</label>
+            <label className="block text-sm font-medium mb-1.5 text-gray-700">Password</label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-600">
                 <Lock size={18} />
               </div>
               <input
