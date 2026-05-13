@@ -26,7 +26,7 @@ export default function AllBills() {
       const data = await res.json();
       if (res.ok && data.success) {
         // Sort bills by bill date descending (latest first)
-        const sortedBills = data.bills.sort((a: any, b: any) => new Date(b.billDate) - new Date(a.billDate));
+        const sortedBills = data.bills.sort((a: any, b: any) => new Date(b.billDate).getTime() - new Date(a.billDate).getTime());
         setBills(sortedBills);
       }
     } catch {
