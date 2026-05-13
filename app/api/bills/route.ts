@@ -12,8 +12,8 @@ export async function GET() {
 
     await dbConnect();
 
-    // Fetch all bills for the current user, sorting by due date
-    const bills = await Bill.find({ user: session.id }).sort({ dueDate: 1 });
+    // Fetch all bills for the current user, sorting by bill date
+    const bills = await Bill.find({ user: session.id }).sort({ billDate: 1 });
 
     return NextResponse.json({ success: true, bills });
   } catch (error) {

@@ -14,13 +14,20 @@ export default function AllBills() {
     fetchBills();
   }, []);
 
+  const formatDate = (date: string | Date) => {
+    const d = new Date(date);
+    return `${d.getDate().toString().padStart(2, '0')}/${(d.getMonth() + 1).toString().padStart(2, '0')}/${d.getFullYear()}`;
+  };
+
   const fetchBills = async () => {
     try {
       setLoading(true);
       const res = await fetch('/api/bills');
       const data = await res.json();
       if (res.ok && data.success) {
-        setBills(data.bills);
+        // Sort bills by bill date descending (latest first)
+        const sortedBills = data.bills.sort((a: any, b: any) => new Date(b.billDate) - new Date(a.billDate));
+        setBills(sortedBills);
       }
     } catch {
       toast.error('Failed to fetch bills');
@@ -62,90 +69,81 @@ export default function AllBills() {
     }
   };
 
-  const exportGlobalExcel = () => {
-    const exportData = bills.map(b => {
-      let notificationStr = 'Completed';
-      if (b.paymentStatus !== 'Paid') {
-        const targetDate = new Date(b.billDate);
-        targetDate.setDate(targetDate.getDate() + b.reminderDays);
-        targetDate.setHours(0, 0, 0, 0);
-        
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        
-        let nextDate = new Date(targetDate);
-        if (today >= targetDate) {
-          nextDate = new Date(today);
-          const wasRemind = b.lastRemindedAt && new Date(b.lastRemindedAt).toDateString() === today.toDateString();
-          const currTime = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Kolkata', hour12: false, hour: '2-digit', minute: '2-digit' }).format(new Date());
-          if (wasRemind || currTime >= (b.reminderTime || '09:00')) {
-            nextDate.setDate(nextDate.getDate() + 1);
-          }
-        }
-        notificationStr = `${nextDate.toLocaleDateString()} at ${b.reminderTime || '09:00'} IST`;
-      }
-      return {
-        'Customer Name': b.customerName,
-        'Product': b.productName,
-        'Amount': b.billAmount,
-        'Remarks': b.remarks,
-        'Bill Date': new Date(b.billDate).toLocaleDateString(),
-        'Due Date': new Date(b.dueDate).toLocaleDateString(),
-        'Notification': notificationStr,
-        'Payment Status': b.paymentStatus
-      };
-    });
+  const getNotificationLabel = (bill: any) => {
+    if (bill.paymentStatus === 'Paid') return 'Completed';
 
-    const ws = XLSX.utils.json_to_sheet(exportData);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "All Bills");
-    XLSX.writeFile(wb, "Remind365_All_Bills.xlsx");
+    const targetDate = new Date(bill.billDate);
+    targetDate.setDate(targetDate.getDate() + bill.reminderDays);
+    targetDate.setHours(0, 0, 0, 0);
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    let nextDate = new Date(targetDate);
+    if (today >= targetDate) {
+      nextDate = new Date(today);
+      const wasRemind = bill.lastRemindedAt && new Date(bill.lastRemindedAt).toDateString() === today.toDateString();
+      const currTime = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Kolkata',
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+      }).format(new Date());
+      if (wasRemind || currTime >= (bill.reminderTime || '14:00')) {
+        nextDate.setDate(nextDate.getDate() + 1);
+      }
+    }
+
+    return `${formatDate(nextDate)} at ${bill.reminderTime || '14:00'} IST`;
+  };
+
+  const exportGlobalExcel = () => {
+    const exportData = bills.map((b) => ({
+      'Customer Name': b.customerName,
+      Product: b.productName,
+      Amount: b.billAmount,
+      Remarks: b.remarks,
+      'Bill Date': formatDate(b.billDate),
+      'Days Difference': b.reminderDays,
+      Notification: getNotificationLabel(b),
+      Status: b.paymentStatus,
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(exportData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'All Bills');
+    XLSX.writeFile(workbook, `all-bills-${new Date().toISOString().slice(0, 10)}.xlsx`);
   };
 
   const exportCustomerExcel = (customerName: string, customerBills: any[]) => {
-    const exportData = customerBills.map(b => {
-      let notificationStr = 'Completed';
-      if (b.paymentStatus !== 'Paid') {
-        const targetDate = new Date(b.billDate);
-        targetDate.setDate(targetDate.getDate() + b.reminderDays);
-        targetDate.setHours(0, 0, 0, 0);
-        
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        
-        let nextDate = new Date(targetDate);
-        if (today >= targetDate) {
-          nextDate = new Date(today);
-          const wasRemind = b.lastRemindedAt && new Date(b.lastRemindedAt).toDateString() === today.toDateString();
-          const currTime = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Kolkata', hour12: false, hour: '2-digit', minute: '2-digit' }).format(new Date());
-          if (wasRemind || currTime >= (b.reminderTime || '09:00')) {
-            nextDate.setDate(nextDate.getDate() + 1);
-          }
-        }
-        notificationStr = `${nextDate.toLocaleDateString()} at ${b.reminderTime || '09:00'} IST`;
-      }
-      return {
-        'Customer Name': b.customerName,
-        'Product': b.productName,
-        'Amount': b.billAmount,
-        'Remarks': b.remarks,
-        'Bill Date': new Date(b.billDate).toLocaleDateString(),
-        'Due Date': new Date(b.dueDate).toLocaleDateString(),
-        'Notification': notificationStr,
-        'Payment Status': b.paymentStatus
-      };
-    });
+    const exportData = customerBills.map((b) => ({
+      'Customer Name': b.customerName,
+      Product: b.productName,
+      Amount: b.billAmount,
+      Remarks: b.remarks,
+      'Bill Date': formatDate(b.billDate),
+      'Days Difference': b.reminderDays,
+      Notification: getNotificationLabel(b),
+      Status: b.paymentStatus,
+    }));
 
-    const ws = XLSX.utils.json_to_sheet(exportData);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, `${customerName} Bills`);
-    XLSX.writeFile(wb, `Remind365_${customerName.replace(/ /g, '_')}_Bills.xlsx`);
+    const worksheet = XLSX.utils.json_to_sheet(exportData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Customer Bills');
+    const safeName = customerName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+    XLSX.writeFile(workbook, `bills-${safeName}-${new Date().toISOString().slice(0, 10)}.xlsx`);
   };
 
-  const filteredBills = bills.filter(b => 
-    b.customerName.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    b.productName.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredBills = bills.filter((bill) => {
+    const search = searchTerm.trim().toLowerCase();
+    if (!search) return true;
+    return (
+      bill.customerName?.toLowerCase().includes(search) ||
+      bill.productName?.toLowerCase().includes(search) ||
+      bill.remarks?.toLowerCase().includes(search) ||
+      bill.paymentStatus?.toLowerCase().includes(search)
+    );
+  });
 
   // Group by customer
   const groupedBills: { [key: string]: any[] } = filteredBills.reduce((acc, bill) => {
@@ -230,8 +228,8 @@ export default function AllBills() {
                           ₹{bill.billAmount.toLocaleString()}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <div><span className="font-medium text-gray-600">Bill:</span> {new Date(bill.billDate).toLocaleDateString()}</div>
-                          <div><span className="font-medium text-gray-600">Due:</span> <span className="text-red-500 font-medium">{new Date(bill.dueDate).toLocaleDateString()}</span></div>
+                          <div><span className="font-medium text-gray-600">Bill:</span> {formatDate(bill.billDate)}</div>
+                          <div><span className="font-medium text-gray-600">Offset:</span> <span className="text-indigo-600 font-medium">{bill.reminderDays} day{bill.reminderDays === 1 ? '' : 's'}</span></div>
                         </td>
                         <td className="px-6 py-4 text-sm text-gray-500 max-w-xs truncate">
                           {bill.remarks || '-'}
@@ -256,7 +254,7 @@ export default function AllBills() {
                               const wasRemindedToday = bill.lastRemindedAt && new Date(bill.lastRemindedAt).toDateString() === today.toDateString();
                               const currentIstTime = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Kolkata', hour12: false, hour: '2-digit', minute: '2-digit' }).format(new Date());
                               
-                              if (wasRemindedToday || currentIstTime >= (bill.reminderTime || '09:00')) {
+                              if (wasRemindedToday || currentIstTime >= (bill.reminderTime || '14:00')) {
                                 nextDate.setDate(nextDate.getDate() + 1);
                               }
                             }
@@ -264,7 +262,7 @@ export default function AllBills() {
                             return (
                               <div className="flex flex-col">
                                 <span className="font-medium text-gray-700">
-                                  {nextDate.toLocaleDateString()}
+                                  {formatDate(nextDate)}
                                 </span>
                                 <span className="text-xs text-gray-600">
                                   {bill.reminderTime || '09:00'} IST

@@ -7,7 +7,6 @@ export interface IBill extends Document {
   billAmount: number;
   remarks: string;
   billDate: Date;
-  dueDate: Date;
   paymentStatus: 'Paid' | 'Partial' | 'Unpaid';
   reminderDays: number;
   reminderTime: string;
@@ -46,10 +45,6 @@ const BillSchema = new Schema<IBill>(
       type: Date,
       required: [true, 'Please provide the bill date.'],
       default: Date.now,
-    },
-    dueDate: {
-      type: Date,
-      required: [true, 'Please provide the due date.'],
     },
     paymentStatus: {
       type: String,

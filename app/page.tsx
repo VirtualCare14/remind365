@@ -19,9 +19,9 @@ export default function Home() {
         </div>
 
         {/* Heading */}
-        <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[90px] xl:text-[100px] font-extrabold tracking-tight mb-5 sm:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-orange-400 to-amber-500 pb-2 leading-[1.1] max-w-xs sm:max-w-2xl md:max-w-4xl lg:max-w-6xl">
-          Reduce Late Payments, Improve Cash Flow
-        </h1>
+     <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold tracking-tight mb-5 sm:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary via-orange-400 to-amber-500 pb-2 leading-[1.1] max-w-xs sm:max-w-2xl md:max-w-4xl lg:max-w-6xl">
+  Focus on Business, Not Follow-Ups
+</h1>
 
         {/* Divider accent */}
         <div className="flex items-center gap-3 mb-6 sm:mb-8">
@@ -32,8 +32,7 @@ export default function Home() {
 
         {/* Subheading */}
         <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 max-w-xs sm:max-w-xl md:max-w-3xl mb-3 sm:mb-4 leading-relaxed font-light">
-          Running a business means juggling multiple responsibilities — keeping track of every due payment shouldn't slow you down.
-        </p>
+        With Remind 365, you don't need multiple apps or complex systems. Everything you need to track payments is in one place — simple, secure, and built just for you. </p>
 
         {/* Secondary description */}
         <p className="text-sm sm:text-base md:text-lg text-gray-500 max-w-xs sm:max-w-lg md:max-w-2xl mb-8 sm:mb-10 leading-relaxed">
@@ -41,7 +40,7 @@ export default function Home() {
         </p>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-10 sm:mb-14 w-full sm:w-auto px-2 sm:px-0">
+        {/* <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-10 sm:mb-14 w-full sm:w-auto px-2 sm:px-0">
           <Link
             href="/contact"
             className="w-full sm:w-auto bg-primary hover:bg-primary-hover text-white px-8 sm:px-10 py-3.5 sm:py-4 rounded-2xl text-base sm:text-lg font-bold btn-animate shadow-2xl shadow-orange-500/30 flex items-center justify-center gap-2 hover:scale-105 transition-transform"
@@ -54,7 +53,7 @@ export default function Home() {
           >
             <span>💡</span> Learn More
           </Link>
-        </div>
+        </div> */}
 
         {/* Trust Stats */}
         <div className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl mx-auto px-2 sm:px-0">
@@ -303,8 +302,8 @@ export default function Home() {
 
           {/* Heading */}
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 sm:mb-5 text-gray-900 relative z-10">
-            Focus on Business,{" "}
-            <span className="text-primary">Not Follow-Ups</span>
+            Stop Chasing Payments Manually,{" "}
+            <span className="text-primary">Automate Reminders and Get Paid Faster</span>
           </h2>
 
           {/* Body */}
@@ -335,7 +334,7 @@ export default function Home() {
               href="/contact"
               className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white px-8 sm:px-10 py-3.5 sm:py-4 rounded-2xl text-base sm:text-lg font-bold btn-animate shadow-2xl shadow-orange-500/30 hover:scale-105 transition-transform"
             >
-              <span>📅</span> Get Started Free
+              <span>📅</span> Book a Free Demo
             </Link>
           </div>
 

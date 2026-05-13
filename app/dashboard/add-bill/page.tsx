@@ -18,10 +18,9 @@ export default function AddBill() {
     billAmount: '',
     remarks: '',
     billDate: new Date().toISOString().split('T')[0],
-    dueDate: '',
     paymentStatus: 'Unpaid',
-    reminderDays: 2, // Default 2 days before
-    reminderTime: '09:00',
+    reminderDays: 2, // Default 2 days after bill date
+    reminderTime: '14:00',
   });
 
   useEffect(() => {
@@ -177,17 +176,6 @@ export default function AddBill() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1.5">Due Date</label>
-              <input 
-                type="date" 
-                required 
-                value={formData.dueDate}
-                onChange={(e) => setFormData({...formData, dueDate: e.target.value})}
-                className="input-premium"
-              />
-            </div>
-
-            <div>
               <label className="block text-sm font-medium mb-1.5">Payment Status</label>
               <select 
                 value={formData.paymentStatus}
@@ -201,7 +189,7 @@ export default function AddBill() {
             </div>
             
             <div className="col-span-1 md:col-span-2 mt-4 pt-4 border-t border-[var(--glass-border)]">
-              <h3 className="text-lg font-semibold mb-4 text-amber-600">Telegram Reminder Settings</h3>
+              <h3 className="text-lg font-semibold mb-4 text-amber-600">Remind me in X days </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium mb-1.5 text-gray-700">Days Difference (from bill date)</label>
@@ -212,7 +200,7 @@ export default function AddBill() {
                     className="input-premium"
                     placeholder="e.g. 2 means 2 days after Bill Date"
                   />
-                  <p className="text-xs text-gray-500 mt-1">If Unpaid, reminding begins X days after Bill Date, and repeats daily.</p>
+                  <p className="text-xs text-gray-500 mt-1">If unpaid, reminders begin X days after bill date and repeat daily.</p>
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1.5 text-gray-700">Time (IST)</label>
@@ -225,6 +213,12 @@ export default function AddBill() {
                   />
                   <p className="text-xs text-gray-500 mt-1">Scheduled time for automated alert dispatch.</p>
                 </div>
+              </div>
+              <div className="rounded-xl bg-slate-50 border border-slate-200 p-4 mt-4 text-sm text-slate-700">
+                <p className="font-medium text-slate-800">Notification preview</p>
+                <p className="mt-2">
+                  Alerts start on <span className="font-semibold">{new Date(new Date(formData.billDate).setDate(new Date(formData.billDate).getDate() + Number(formData.reminderDays))).toLocaleDateString()}</span> at <span className="font-semibold">{formData.reminderTime} IST</span>.
+                </p>
               </div>
             </div>
 
